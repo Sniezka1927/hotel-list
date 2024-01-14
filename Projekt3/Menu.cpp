@@ -82,6 +82,7 @@ void displayMenu(Room* roomList) {
             writeRoomsToFile(roomList);
             break;
         case 9:
+            roomList = readRoomsFromFile();
             break;
         case 10:
             break;

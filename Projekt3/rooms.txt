@@ -1,1 +1,1 @@
-1 1 2000 1 dirty Wiktor Kolega
+1 1 1 1 DIRTY 1 1

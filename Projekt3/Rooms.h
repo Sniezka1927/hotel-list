@@ -38,4 +38,6 @@ void freeRoomList(Room* head);
 
 void writeRoomsToFile(Room* head);
 
+Room* readRoomsFromFile();
+
 #endif

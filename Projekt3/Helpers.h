@@ -2,16 +2,13 @@
 #define HELPERS_H
 
 #include <stdio.h>
-// clude "Rooms.h"
+#include "Status.h"
 
 
 void validateDate(int day, int month, int year);
 
+const char* cleaningStatusToString(CleaningStatus status);
 
-// void writeRoomsToFile(Room* head);
-
-
-// saveToFile
-// readFromFile
+CleaningStatus stringToCleaningStatus(const char* statusStr);
 
 #endif

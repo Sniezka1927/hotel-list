@@ -150,15 +150,15 @@ void displayRoomList(Room* head) {
     Room* current = head;
     while (current != NULL) {
         if (head->cleaning_status == DIRTY) {
-            fprintf(file, "%d %d %d %d dirty %s %s\n",
+            fprintf(file, "%d %d %d %d %s %s %s\n",
                 current->day, current->month, current->year,
-                current->room_number,
+                current->room_number, cleaningStatusToString(current->cleaning_status),
                 current->cleaner_name, current->hotel_name);
         }
         else {
-            fprintf(file, "%d %d %d %d cleaned %s %s\n",
+            fprintf(file, "%d %d %d %d %s %s %s\n",
                 current->day, current->month, current->year,
-                current->room_number,
+                current->room_number, cleaningStatusToString(current->cleaning_status),
                 current->cleaner_name, current->hotel_name);
         }
         current = current->next;
@@ -166,6 +166,57 @@ void displayRoomList(Room* head) {
 
     fclose(file);
 }
+
+ Room* readRoomsFromFile() {
+     FILE* file = fopen("rooms.txt", "r");
+     if (file == NULL) {
+         // add custom error
+         fprintf(stderr, "Error opening file for reading\n");
+         return NULL;
+     }
+
+     Room* head = NULL;
+     Room* current = NULL;
+
+     while (1) {
+         Room* newRoom = (Room*)malloc(sizeof(Room));
+         if (newRoom == NULL) {
+             // add custom error
+             fprintf(stderr, "Memory allocation failed\n");
+             fclose(file);
+             return NULL;
+         }
+
+         char tmpCleaningStatus[8];
+
+
+         int result = fscanf(file, "%d %d %d %d %s %49s %19s", 
+             &newRoom->day, &newRoom->month, &newRoom->year,
+             &newRoom->room_number, &tmpCleaningStatus,
+             newRoom->cleaner_name, newRoom->hotel_name);
+
+         newRoom->cleaning_status = stringToCleaningStatus(tmpCleaningStatus);
+
+         if (result != 7) {
+             free(newRoom);
+             break;  // Exit the loop if not enough items were read (end of file)
+         }
+
+         newRoom->next = NULL;         
+
+         if (head == NULL) {
+             head = newRoom;
+             current = head;
+         }
+         else {
+             current->next = newRoom;
+             current = newRoom;
+         }
+     }
+
+     fclose(file);
+     return head;
+ }
 
 void freeRoomList(Room* head) {
     while (head != NULL) {
