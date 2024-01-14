@@ -16,7 +16,9 @@ void displayMenu(Room* roomList) {
         printf("5. Remove from beginning\n");
         printf("6. Remove from end\n");
         printf("7. Clean room\n");
-        printf("8. Exit\n");
+        printf("8. Write rooms to file\n");
+        printf("9. Read rooms from file\n");
+        printf("10. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -24,8 +26,7 @@ void displayMenu(Room* roomList) {
         case 1: {
             int day, month, year, room_number;
             char cleaner_name[50], hotel_name[20];
-            char cleaning_status[20] = "dirty";
-
+            
             printf("Enter room details:\n");
             printf("Day: "); scanf("%d", &day);
             printf("Month: "); scanf("%d", &month);
@@ -34,14 +35,13 @@ void displayMenu(Room* roomList) {
             printf("Cleaner Name: "); scanf("%49s", cleaner_name);
             printf("Hotel Name: "); scanf("%19s", hotel_name);
             validateDate(day, month, year);
-            roomList = addRoomToBeginning(roomList, day, month, year, room_number, cleaning_status, cleaner_name, hotel_name);
+            roomList = addRoomToBeginning(roomList, day, month, year, room_number, cleaner_name, hotel_name);
             
             break;
         }
         case 2: {
             int day, month, year, room_number;
             char cleaner_name[50], hotel_name[20];
-            char cleaning_status[20] = "dirty";
 
             printf("Enter room details:\n");
             printf("Day: "); scanf("%d", &day);
@@ -52,7 +52,7 @@ void displayMenu(Room* roomList) {
             printf("Hotel Name: "); scanf("%19s", hotel_name);
             printf("Received hotel name %s \n \n \n", hotel_name);
             validateDate(day, month, year);
-            roomList = addRoomToEnd(roomList, day, month, year, room_number, cleaning_status, cleaner_name, hotel_name);
+            roomList = addRoomToEnd(roomList, day, month, year, room_number, cleaner_name, hotel_name);
             break;
         }
         case 3:
@@ -78,10 +78,15 @@ void displayMenu(Room* roomList) {
             break;
         }
         case 8:
+            // writeRoomsToFile(roomList);
+            break;
+        case 9:
+            break;
+        case 10:
             break;
         default:
             printf("Invalid choice. Please enter a number between 1 and 8.\n");
         }
 
-    } while (choice != 8);
+    } while (choice != 10);
 }

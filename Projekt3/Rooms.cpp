@@ -3,6 +3,7 @@
 #include <string.h>
 #include "Helpers.h"
 #include "Error.h"
+#include "Status.h"
 #pragma warning(disable: 4996)
 
 typedef struct Room {
@@ -10,7 +11,7 @@ typedef struct Room {
     int month;
     int year;
     int room_number;
-    char cleaning_status[20];  // Status ("clean", "dirty")
+    CleaningStatus cleaning_status;
     char cleaner_name[50];
     char hotel_name[20];
     struct Room* next;
@@ -22,7 +23,7 @@ Room* initializeRoomList() {
 }
 
 
-Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_number, const char* cleaning_status, const char* cleaner_name, const char* hotel_name) {
+Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name) {
     Room* newRoom = (Room*)malloc(sizeof(Room));
     if (newRoom == NULL) {
          throwError(3);
@@ -32,7 +33,7 @@ Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_numb
     newRoom->month = month;
     newRoom->year = year;
     newRoom->room_number = room_number;
-    strcpy(newRoom->cleaning_status, cleaning_status);
+    newRoom->cleaning_status = DIRTY;
     strcpy(newRoom->cleaner_name, cleaner_name);
     strcpy(newRoom->hotel_name, hotel_name);
     newRoom->next = head;
@@ -41,7 +42,7 @@ Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_numb
 }
 
 
-Room* addRoomToEnd(Room* head, int day, int month, int year, int room_number, const char* cleaning_status, const char* cleaner_name, const char* hotel_name) {
+Room* addRoomToEnd(Room* head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name) {
     Room* newRoom= (Room*)malloc(sizeof(Room));
     if (newRoom == NULL) {
          throwError(3);
@@ -50,7 +51,7 @@ Room* addRoomToEnd(Room* head, int day, int month, int year, int room_number, co
     newRoom->month = month;
     newRoom->year = year;
     newRoom->room_number = room_number;
-    strcpy(newRoom->cleaning_status, cleaning_status);
+    newRoom->cleaning_status = DIRTY;
     strcpy(newRoom->cleaner_name, cleaner_name);
     strcpy(newRoom->hotel_name, hotel_name);
     newRoom->next = NULL;
@@ -111,7 +112,7 @@ Room* cleanRoom(Room* head, int roomNumber, const char* hotelName) {
     while (current != NULL) {
         if (current->room_number == roomNumber && strcmp(current->hotel_name, hotelName) == 0) {
             // Found the room in the specified hotel, update cleaning status
-            strcpy(current->cleaning_status, "cleaned");
+            current->cleaning_status = CLEANED;
             printf("Room %d in %s has been cleaned.\n", roomNumber, hotelName);
             is_found = 1;
             break;
@@ -137,8 +138,14 @@ int countElements(Room* head) {
 void displayRoomList(Room* head) {
     printf("Room List:\n");
     while (head != NULL) {
-        printf("Date: %d-%02d-%02d, Room Number: %d, Status: %s, Cleaner: %s, Hotel: %s \n",
-            head->year, head->month, head->day, head->room_number, head->cleaning_status, head->cleaner_name, head->hotel_name);
+        if (head->cleaning_status == DIRTY) {
+            printf("Date: %d-%02d-%02d, Room Number: %d, Status: dirty, Cleaner: %s, Hotel: %s \n",
+                head->year, head->month, head->day, head->room_number, head->cleaner_name, head->hotel_name);
+        }
+        else {
+            printf("Date: %d-%02d-%02d, Room Number: %d, Status: cleaned, Cleaner: %s, Hotel: %s \n",
+                head->year, head->month, head->day, head->room_number, head->cleaner_name, head->hotel_name);
+        }
         head = head->next;
     }
 }
