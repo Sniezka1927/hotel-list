@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Helpers.h"
+#include "Error.h"
 #pragma warning(disable: 4996)
 
 typedef struct Room {
@@ -24,7 +25,6 @@ Room* initializeRoomList() {
 Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_number, const char* cleaning_status, const char* cleaner_name, const char* hotel_name) {
     Room* newRoom = (Room*)malloc(sizeof(Room));
     if (newRoom == NULL) {
-        // should be 3
          throwError(3);
     }
 
@@ -44,7 +44,7 @@ Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_numb
 Room* addRoomToEnd(Room* head, int day, int month, int year, int room_number, const char* cleaning_status, const char* cleaner_name, const char* hotel_name) {
     Room* newRoom= (Room*)malloc(sizeof(Room));
     if (newRoom == NULL) {
-         // throwError(3);
+         throwError(3);
     }
     newRoom->day = day;
     newRoom->month = month;

@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "Error.h"
 
-
-void throwError(int nr) {
-
-}
 
 void validateDate(int day, int month, int year) {
     // Check if month is valid

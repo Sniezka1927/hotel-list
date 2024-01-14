@@ -4,6 +4,4 @@
 
 void validateDate(int day, int month, int year);
 
-void throwError(int nr);
-
 #endif
