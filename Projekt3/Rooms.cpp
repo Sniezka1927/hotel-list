@@ -4,18 +4,8 @@
 #include "Helpers.h"
 #include "Error.h"
 #include "Status.h"
+#include "Rooms.h"
 #pragma warning(disable: 4996)
-
-typedef struct Room {
-    int day;
-    int month;
-    int year;
-    int room_number;
-    CleaningStatus cleaning_status;
-    char cleaner_name[50];
-    char hotel_name[20];
-    struct Room* next;
-} Room;
 
 
 Room* initializeRoomList() {
@@ -148,6 +138,33 @@ void displayRoomList(Room* head) {
         }
         head = head->next;
     }
+}
+
+ void writeRoomsToFile(Room* head) {
+    FILE* file = fopen("rooms.txt", "w");
+    if (file == NULL) {
+        fprintf(stderr, "Error opening file for writing\n");
+        return;
+    }
+
+    Room* current = head;
+    while (current != NULL) {
+        if (head->cleaning_status == DIRTY) {
+            fprintf(file, "%d %d %d %d dirty %s %s\n",
+                current->day, current->month, current->year,
+                current->room_number,
+                current->cleaner_name, current->hotel_name);
+        }
+        else {
+            fprintf(file, "%d %d %d %d cleaned %s %s\n",
+                current->day, current->month, current->year,
+                current->room_number,
+                current->cleaner_name, current->hotel_name);
+        }
+        current = current->next;
+    }
+
+    fclose(file);
 }
 
 void freeRoomList(Room* head) {

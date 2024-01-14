@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Helpers.h"
+#include "Menu.h"
 #pragma warning(disable: 4996)
 
 void displayMenu(Room* roomList) {
@@ -78,7 +79,7 @@ void displayMenu(Room* roomList) {
             break;
         }
         case 8:
-            // writeRoomsToFile(roomList);
+            writeRoomsToFile(roomList);
             break;
         case 9:
             break;

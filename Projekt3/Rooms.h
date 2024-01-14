@@ -20,7 +20,6 @@ typedef struct Room {
 
 Room* initializeRoomList();
 
-
 Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name);
 
 Room* addRoomToEnd(Room * head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name);
@@ -36,5 +35,7 @@ void displayRoomList(Room* head);
 Room* cleanRoom(Room* head, int roomNumber, const char* hotelName);
 
 void freeRoomList(Room* head);
+
+void writeRoomsToFile(Room* head);
 
 #endif

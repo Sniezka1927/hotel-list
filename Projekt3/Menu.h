@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 
-
 void displayMenu(Room* roomList);
 
 #endif

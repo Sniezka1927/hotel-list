@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "Error.h"
 const int maxErr = 4;
 
 static const char* p[] = { "",

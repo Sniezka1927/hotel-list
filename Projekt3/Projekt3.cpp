@@ -5,6 +5,7 @@
 #pragma warning(disable: 4996)
 #include "Rooms.h"
 #include "Menu.h"
+#include "Helpers.h"
 
 
 int main() {

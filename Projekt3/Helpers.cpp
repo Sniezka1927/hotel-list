@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "Error.h"
 #include "Rooms.h"
+#include "Helpers.h"
 #pragma warning(disable: 4996)
 
 void validateDate(int day, int month, int year) {
@@ -44,8 +45,8 @@ void validateDate(int day, int month, int year) {
     }
 }
 
-//void writeRoomsToFile(Room* head) {
-//    FILE* file = fopen("rooms.bin", "wb");
+// void writeRoomsToFile(Room* head) {}
+//    FILE* file = fopen("rooms.txt", "w+");
 //    if (file == NULL) {
 //        fprintf(stderr, "Error opening file for writing\n");
 //        return;
