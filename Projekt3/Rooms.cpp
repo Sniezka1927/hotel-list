@@ -143,8 +143,7 @@ void displayRoomList(Room* head) {
  void writeRoomsToFile(Room* head) {
     FILE* file = fopen("rooms.txt", "w");
     if (file == NULL) {
-        fprintf(stderr, "Error opening file for writing\n");
-        return;
+        throwError(2);
     }
 
     Room* current = head;
@@ -170,9 +169,7 @@ void displayRoomList(Room* head) {
  Room* readRoomsFromFile() {
      FILE* file = fopen("rooms.txt", "r");
      if (file == NULL) {
-         // add custom error
-         fprintf(stderr, "Error opening file for reading\n");
-         return NULL;
+         throwError(2);
      }
 
      Room* head = NULL;
@@ -181,10 +178,8 @@ void displayRoomList(Room* head) {
      while (1) {
          Room* newRoom = (Room*)malloc(sizeof(Room));
          if (newRoom == NULL) {
-             // add custom error
-             fprintf(stderr, "Memory allocation failed\n");
              fclose(file);
-             return NULL;
+             throwError(3);
          }
 
          char tmpCleaningStatus[8];
@@ -199,7 +194,7 @@ void displayRoomList(Room* head) {
 
          if (result != 7) {
              free(newRoom);
-             break;  // Exit the loop if not enough items were read (end of file)
+             break;  // END OF FILE
          }
 
          newRoom->next = NULL;         

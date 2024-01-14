@@ -46,12 +46,10 @@ void validateDate(int day, int month, int year) {
     }
 }
 
-// Helper function to convert CleaningStatus to string
 const char* cleaningStatusToString(CleaningStatus status) {
     return (status == CLEANED) ? "CLEAN" : "DIRTY";
 }
 
-// Helper function to convert string to CleaningStatus
 CleaningStatus stringToCleaningStatus(const char* statusStr) {
     return (strcmp(statusStr, "CLEAN") == 0) ? CLEANED : DIRTY;
 }

@@ -132,7 +132,6 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Projekt3.cpp" />
     <ClCompile Include="Rooms.cpp" />
-    <ClCompile Include="Status.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
