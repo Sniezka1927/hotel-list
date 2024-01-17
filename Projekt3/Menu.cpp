@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "Helpers.h"
 #include "Menu.h"
+#include "Error.h"
 #pragma warning(disable: 4996)
 
 void displayMenu(Room* roomList) {
@@ -25,35 +26,46 @@ void displayMenu(Room* roomList) {
 
         switch (choice) {
         case 1: {
-            int day, month, year, room_number;
-            char cleaner_name[50], hotel_name[20];
+            int day, month, year, roomNumber;
+            char cleanerName[50], hotelName[20];
             
             printf("Enter room details:\n");
-            printf("Day: "); scanf("%d", &day);
-            printf("Month: "); scanf("%d", &month);
-            printf("Year: "); scanf("%d", &year);
-            printf("Room Number: "); scanf("%d", &room_number);
-            printf("Cleaner Name: "); scanf("%49s", cleaner_name);
-            printf("Hotel Name: "); scanf("%19s", hotel_name);
+            printf("Day: "); 
+            if (scanf("%d", &day) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Month: ");
+            if (scanf("%d", &month) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Year: ");
+            if (scanf("%d", &year) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Room Number: ");
+            if (scanf("%d", &roomNumber) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Cleaner Name: ");
+            if (scanf("%49s", cleanerName) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Hotel Name: ");
+            if (scanf("%19s", hotelName) != 1 || getchar() != '\n') { throwError(4); };
             validateDate(day, month, year);
-            roomList = addRoomToBeginning(roomList, day, month, year, room_number, cleaner_name, hotel_name);
+            roomList = addRoomToBeginning(roomList, day, month, year, roomNumber, cleanerName, hotelName);
             
             break;
         }
         case 2: {
-            int day, month, year, room_number;
-            char cleaner_name[50], hotel_name[20];
+            int day, month, year, roomNumber;
+            char cleanerName[50], hotelName[20];
 
             printf("Enter room details:\n");
-            printf("Day: "); scanf("%d", &day);
-            printf("Month: "); scanf("%d", &month);
-            printf("Year: "); scanf("%d", &year);
-            printf("Room Number: "); scanf("%d", &room_number);
-            printf("Cleaner Name: "); scanf("%49s", cleaner_name);
-            printf("Hotel Name: "); scanf("%19s", hotel_name);
-            printf("Received hotel name %s \n \n \n", hotel_name);
+            printf("Day: ");
+            if (scanf("%d", &day) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Month: ");
+            if (scanf("%d", &month) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Year: ");
+            if (scanf("%d", &year) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Room Number: ");
+            if (scanf("%d", &roomNumber) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Cleaner Name: ");
+            if (scanf("%49s", cleanerName) != 1 || getchar() != '\n') { throwError(4); };
+            printf("Hotel Name: ");
+            if (scanf("%19s", hotelName) != 1 || getchar() != '\n') { throwError(4); };
             validateDate(day, month, year);
-            roomList = addRoomToEnd(roomList, day, month, year, room_number, cleaner_name, hotel_name);
+            roomList = addRoomToEnd(roomList, day, month, year, roomNumber, cleanerName, hotelName);
             break;
         }
         case 3:
@@ -72,9 +84,10 @@ void displayMenu(Room* roomList) {
             int roomNumber;
             char hotelName[20];
             printf("Enter the room number to clean: ");
-            scanf("%d", &roomNumber);
+            if (scanf("%d", &roomNumber) != 1 || getchar() != '\n') { throwError(4); };
             printf("Enter the hotel name: ");
-            scanf("%19s", hotelName);
+            if (scanf("%19s", hotelName) != 1 || getchar() != '\n') { throwError(4); };
+
             roomList = cleanRoom(roomList, roomNumber, hotelName);
             break;
         }

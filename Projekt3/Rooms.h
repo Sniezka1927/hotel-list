@@ -10,19 +10,19 @@ typedef struct Room {
     int day;
     int month;
     int year;
-    int room_number;
-    CleaningStatus cleaning_status;
-    char cleaner_name[50];
-    char hotel_name[20];
+    int roomNumber;
+    CleaningStatus cleaningStatus;
+    char cleanerName[50];
+    char hotelName[20];
     struct Room* next;
 } Room;
 
 
 Room* initializeRoomList();
 
-Room* addRoomToBeginning(Room* head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name);
+Room* addRoomToBeginning(Room* head, int day, int month, int year, int roomNumber, const char* cleanerName, const char* hotelName);
 
-Room* addRoomToEnd(Room * head, int day, int month, int year, int room_number, const char* cleaner_name, const char* hotel_name);
+Room* addRoomToEnd(Room * head, int day, int month, int year, int roomNumber, const char* cleanerName, const char* hotelName);
 
 int countElements(Room* head);
 
